@@ -1,0 +1,44 @@
+<!doctype html>
+<title>Upload</title>
+<h2>Select file(s) to upload</h2>
+<p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+<ul class=flashes>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+</p>
+<div>
+    <form method="POST" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="files[]" multiple="true" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Submit and Analyse">
+        </p>
+
+    </form>
+
+</div>
+
+<form method="POST" action="/search" >
+    <p>
+        <input type="text" placeholder="Search....." name="search" id="search">
+    </p>
+    <p>
+        <input type="submit" value="Search">
+    </p>
+</form>
+
+{% if showImages %}
+
+    <img height="480", width="480", src="{{url_for('static', filename=images)}}" />
+
+
+{% endif %}
